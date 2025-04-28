@@ -1,0 +1,87 @@
+/* Default jquery-loading styles */
+
+.loading-overlay {
+  display: table;
+  opacity: 0.7;
+}
+
+.loading-overlay-content {
+  text-transform: uppercase;
+  /*letter-spacing: 0.4em;*/
+  font-size: 1.15em;
+  font-weight: bold;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.loading-overlay.loading-theme-light {
+  background-color: #fff;
+  color: #000;
+}
+
+.loading-overlay.loading-theme-dark {
+  background-color: #000;
+  color: #fff;
+}
+.dataTables_wrapper{
+  padding: 0px;
+}
+.dtable{
+  width: 100%!important;
+}
+.help-block
+{
+  color: red;
+}
+.has-error
+{
+  border: 2px solid red;
+}
+.ck-editor__editable_inline 
+{
+  min-height: 300px;
+}
+.img-center
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #2255a4 !important;
+}
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-right: 10px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+}
+#date-range
+{
+  background: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+}
+.sidebar-nav ul .sidebar-item .parent-link {
+  opacity: 1 !important;
+}
+.sidebar-nav{height:90vh; overflow:auto}
+.page-wrapper{height:90vh; overflow:auto}
+.organisation, .sub_organisation{
+  display: none;
+}
+.start_date, .end_date{
+  display: none;
+}
+.user-dashboard
+{
+  width: 100%;
+  height: calc(100vh - 170px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -11,13 +12,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        $status = User::STATUS;
+
+        Schema::create('users', function (Blueprint $table) use ($status) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('parent_id')->nullable();
+            $table->string('name')->nullable()->index();
+            $table->string('email')->nullable()->unique()->index();
+            $table->string('phone_number')->nullable()->unique()->index();
+            $table->string('password')->nullable();
+            $table->string('profile_picture')->nullable();
+            $table->tinyInteger('status')->default($status['Inactive'])->comment($status['Inactive'] . '=Inactive,' . $status['Active'] . '=Active')->index();
+            $table->text('bio')->nullable();
+            $table->index(['id','parent_id']);
             $table->timestamps();
         });
 
