@@ -78,7 +78,7 @@
                                     <div class="attachment-text">
                                         {{ $row->comments }}
                                         @if($roleName != $role)
-                                            <button type="button" onClick="replyComment('{{ $row->id }}', '{{ e($row->comments) }}')" class="btn btn-primary btn-xs">
+                                            <button type="button" onClick="replyComment('{{ $row->id }}', '{{ $row->comments }}')" class="btn btn-primary btn-xs">
                                                 <i class="fa fa-reply"></i> Reply
                                             </button>
                                         @endif
@@ -118,7 +118,45 @@
                                 </div>
                             </div>
                         @else
-                            <p>{{ $row->comments }}</p>
+                            <p>{{ $row->comments }}
+                                @if($roleName != $role)
+                                    <button type="button" onClick="replyComment('{{ $row->id }}', '{{ $row->comments }}')" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-reply"></i> Reply
+                                    </button>
+                                @endif
+                                @if(count($row->comment_reply) > 0)
+                                    <div class="box-footer box-comments">
+                                        @foreach($row->comment_reply as $data)
+                                            <div class="box-comment">
+                                                @if(!empty($data->user->profile_picture))
+                                                    <img class="img-circle img-sm" src="{{ url($data->user->profile_picture) }}">
+                                                @else
+                                                    <img class="img-circle img-sm" src="{{ url('assets/images/users/1.jpg') }}">
+                                                @endif
+
+                                                <div class="comment-text">
+                                                    <span class="username">
+                                                        {{ $data->user->name }}
+                                                        <span class="text-muted pull-right">{{ date('d-M-Y h:i a',strtotime($data->created_at)) }}y</span>
+                                                    </span>
+                                                    @if(!empty($data->file))
+                                                    <div class="attachment-block clearfix">
+                                                        <img class="attachment-img" src="{{ url($data->file) }}" alt="Attachment Image">
+                                                        <div style="margin-left:40px">
+                                                            <div class="attachment-text">
+                                                                {{ $row->comments }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @else
+                                                        <p>{{ $data->comments }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </p>
                         @endif
                     </div>
                 @endforeach
