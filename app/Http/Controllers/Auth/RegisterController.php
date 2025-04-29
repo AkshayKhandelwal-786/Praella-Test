@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateRegisterRequest;
 use Illuminate\Support\Facades\{DB, Hash};
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\{User, Role};
 
 class RegisterController extends Controller
 {
@@ -16,6 +16,8 @@ class RegisterController extends Controller
     public function store(CreateRegisterRequest $request)
     {
         DB::beginTransaction();
+        $superAdmin = Role::ROLE_NAME['Super-Admin'];
+
         try {
             $user           = new User;
             $user->name     = $request->name;
@@ -23,6 +25,7 @@ class RegisterController extends Controller
             $user->password = Hash::make($request->password);
             $user->status   = User::STATUS['Active'];
             $user->save();
+            $user->assignRole($superAdmin);
 
             DB::commit();
             return redirect()
